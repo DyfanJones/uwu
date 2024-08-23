@@ -86,3 +86,31 @@ for (j in seq_along(to_impute)) {
 to_impute
 ```
 
+### Short uuids:
+
+Generate short uuid string (default flickrBase58 alphabet)
+
+```{r}
+n <- 10
+short_uuid(n)
+```
+
+
+Bitcoin58 example:
+
+```{r}
+short_uuid(n, "bitcoin58")
+```
+
+Convert uuid V4 to short (default flickrBase58 alphabet)
+
+```{r}
+uuids <- new_v4(n)
+uuid_to_short(uuids)
+```
+
+Convert uuid V4 to short (default bitcoin58 alphabet)
+
+```{r}
+uuid_to_short(uuids, "bitcoin58")
+```
