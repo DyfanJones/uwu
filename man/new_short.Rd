@@ -4,12 +4,12 @@
 \alias{new_short}
 \title{Generate new Short UUID}
 \usage{
-new_short(uuid, short = c("flickr_base58", "bitcoin58"))
+new_short(n, short = c("flickr_base58", "bitcoin58"))
 }
 \arguments{
-\item{short}{what alphabet to use}
-
 \item{n}{the number of short uuids to generate}
+
+\item{short}{what alphabet to use}
 }
 \description{
 Generate new Short UUID

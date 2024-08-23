@@ -3,12 +3,12 @@
 #' @param n the number of short uuids to generate
 #' @param short what alphabet to use
 #' @export
-new_short <- function(uuid, short = c("flickr_base58", "bitcoin58")) {
+new_short <- function(n, short = c("flickr_base58", "bitcoin58")) {
   short <- match.arg(short)
   switch(
     short,
-    "flickr_base58" = short_flickr_base58_(uuid),
-    "bitcoin58" = short_bitcoin58_(uuid)
+    "flickr_base58" = short_flickr_base58_(n),
+    "bitcoin58" = short_bitcoin58_(n)
   )
 }
 
