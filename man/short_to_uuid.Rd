@@ -7,10 +7,13 @@
 short_to_uuid(short_uuid, short = c("flickr_base58", "bitcoin58"))
 }
 \arguments{
-\item{short}{what alphabet to use}
+\item{short_uuid}{vector of short-uuids}
 
-\item{uuid}{vector of uuids}
+\item{short}{what alphabet to use}
 }
 \description{
 Convert short to uuid
+}
+\seealso{
+\code{\link[=new_short]{new_short()}}
 }

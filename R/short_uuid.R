@@ -29,8 +29,9 @@ uuid_to_short <- function(uuid, short = c("flickr_base58", "bitcoin58")) {
 
 #' Convert short to uuid
 #'
-#' @param uuid vector of uuids
+#' @param short_uuid vector of short-uuids
 #' @param short what alphabet to use
+#' @seealso [new_short()]
 #' @export
 short_to_uuid <- function(short_uuid, short = c("flickr_base58", "bitcoin58")) {
   short <- match.arg(short)
