@@ -24,5 +24,20 @@ new_v7 <- function(n) .Call(wrap__new_v7, n)
 
 impute_uuid_ <- function(x, prefix) invisible(.Call(wrap__impute_uuid_, x, prefix))
 
+#' Generate new Short UUID
+#'
+#' @param n the number of short uuids to generate
+#' @name short_uuid
+#' @export
+short_flickr_base58 <- function(n) .Call(wrap__short_flickr_base58, n)
+
+#' @export
+#' @rdname short_uuid
+short_bitcoin58 <- function(n) .Call(wrap__short_bitcoin58, n)
+
+uuid_flickr_to_short_ <- function(uuid) .Call(wrap__uuid_flickr_to_short_, uuid)
+
+uuid_bitcoin58_to_short_ <- function(uuid) .Call(wrap__uuid_bitcoin58_to_short_, uuid)
+
 
 # nolint end

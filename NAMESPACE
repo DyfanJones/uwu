@@ -3,4 +3,7 @@
 export(impute_uuid)
 export(new_v4)
 export(new_v7)
+export(short_bitcoin58)
+export(short_flickr_base58)
+export(uuid_to_short)
 useDynLib(uwu, .registration = TRUE)
