@@ -28,9 +28,13 @@ short_flickr_base58_ <- function(n) .Call(wrap__short_flickr_base58_, n)
 
 short_bitcoin58_ <- function(n) .Call(wrap__short_bitcoin58_, n)
 
-uuid_flickr_to_short_ <- function(uuid) .Call(wrap__uuid_flickr_to_short_, uuid)
+uuid_to_short_flickr_ <- function(uuid) .Call(wrap__uuid_to_short_flickr_, uuid)
 
-uuid_bitcoin58_to_short_ <- function(uuid) .Call(wrap__uuid_bitcoin58_to_short_, uuid)
+uuid_to_short_bitcoin58_ <- function(uuid) .Call(wrap__uuid_to_short_bitcoin58_, uuid)
+
+short_flickr_to_uuid_ <- function(short_uuid) .Call(wrap__short_flickr_to_uuid_, short_uuid)
+
+short_bitcoin58_to_uuid_ <- function(short_uuid) .Call(wrap__short_bitcoin58_to_uuid_, short_uuid)
 
 
 # nolint end

@@ -8,6 +8,8 @@ uuid_to_short(uuid, short = c("flickr_base58", "bitcoin58"))
 }
 \arguments{
 \item{uuid}{vector of uuids}
+
+\item{short}{what alphabet to use}
 }
 \description{
 Convert uuid to short

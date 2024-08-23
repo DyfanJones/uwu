@@ -69,14 +69,14 @@ fn short_bitcoin58_(n: i32) -> Strings {
 }
 
 #[extendr]
-fn uuid_flickr_to_short_(uuid: Strings) -> Strings {
+fn uuid_to_short_flickr_(uuid: Strings) -> Strings {
     uuid.into_iter()
         .map(|u| ShortUuid::from_uuid_str(u).unwrap().to_string())
         .collect::<Strings>()
 }
 
 #[extendr]
-fn uuid_bitcoin58_to_short_(uuid: Strings) -> Strings {
+fn uuid_to_short_bitcoin58_(uuid: Strings) -> Strings {
     let custom_alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
     let translator = CustomTranslator::new(custom_alphabet).unwrap();
 
@@ -85,6 +85,33 @@ fn uuid_bitcoin58_to_short_(uuid: Strings) -> Strings {
             ShortUuidCustom::from_uuid_str(u, &translator)
                 .unwrap()
                 .to_string()
+        })
+        .collect::<Strings>()
+}
+
+#[extendr]
+fn short_flickr_to_uuid_(short_uuid: Strings) -> Strings {
+    short_uuid
+        .into_iter()
+        .map(|u| {
+            let uuid = ShortUuid::parse_str(u).unwrap().to_uuid();
+            uuid.to_string()
+        })
+        .collect::<Strings>()
+}
+
+#[extendr]
+fn short_bitcoin58_to_uuid_(short_uuid: Strings) -> Strings {
+    let custom_alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+    let translator = CustomTranslator::new(custom_alphabet).unwrap();
+
+    short_uuid
+        .into_iter()
+        .map(|u| {
+            let uuid = ShortUuidCustom::parse_str(u, &translator)
+                .unwrap()
+                .to_uuid(&translator);
+            uuid.unwrap().to_string()
         })
         .collect::<Strings>()
 }
@@ -99,6 +126,8 @@ extendr_module! {
     fn impute_uuid_;
     fn short_flickr_base58_;
     fn short_bitcoin58_;
-    fn uuid_flickr_to_short_;
-    fn uuid_bitcoin58_to_short_;
+    fn uuid_to_short_flickr_;
+    fn uuid_to_short_bitcoin58_;
+    fn short_flickr_to_uuid_;
+    fn short_bitcoin58_to_uuid_;
 }
