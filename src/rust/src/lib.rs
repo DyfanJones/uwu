@@ -45,12 +45,7 @@ fn impute_uuid_(x: Strings, prefix: &str) {
 }
 
 #[extendr]
-/// Generate new Short UUID
-///
-/// @param n the number of short uuids to generate
-/// @name short_uuid
-/// @export
-fn short_flickr_base58(n: i32) -> Strings {
+fn short_flickr_base58_(n: i32) -> Strings {
     let n = n as usize;
 
     let range = 0..n;
@@ -61,9 +56,7 @@ fn short_flickr_base58(n: i32) -> Strings {
 }
 
 #[extendr]
-/// @export
-/// @rdname short_uuid
-fn short_bitcoin58(n: i32) -> Strings {
+fn short_bitcoin58_(n: i32) -> Strings {
     let n = n as usize;
     let custom_alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
     let translator = CustomTranslator::new(custom_alphabet).unwrap();
@@ -104,8 +97,8 @@ extendr_module! {
     fn new_v4;
     fn new_v7;
     fn impute_uuid_;
-    fn short_flickr_base58;
-    fn short_bitcoin58;
+    fn short_flickr_base58_;
+    fn short_bitcoin58_;
     fn uuid_flickr_to_short_;
     fn uuid_bitcoin58_to_short_;
 }
