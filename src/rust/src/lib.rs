@@ -71,7 +71,13 @@ fn short_bitcoin58_(n: i32) -> Strings {
 #[extendr]
 fn uuid_to_short_flickr_(uuid: Strings) -> Strings {
     uuid.into_iter()
-        .map(|u| ShortUuid::from_uuid_str(u).unwrap().to_string())
+        .map(|u| {
+            let uuidi = ShortUuid::from_uuid_str(u);
+            match uuidi {
+                Ok(uuidi) => Rstr::from(uuidi.to_string()),
+                Err(_) => Rstr::na(),
+            }
+        })
         .collect::<Strings>()
 }
 
@@ -82,9 +88,11 @@ fn uuid_to_short_bitcoin58_(uuid: Strings) -> Strings {
 
     uuid.into_iter()
         .map(|u| {
-            ShortUuidCustom::from_uuid_str(u, &translator)
-                .unwrap()
-                .to_string()
+            let uuidi = ShortUuidCustom::from_uuid_str(u, &translator);
+            match uuidi {
+                Ok(uuidi) => Rstr::from(uuidi.to_string()),
+                Err(_) => Rstr::na(),
+            }
         })
         .collect::<Strings>()
 }
@@ -94,8 +102,11 @@ fn short_flickr_to_uuid_(short_uuid: Strings) -> Strings {
     short_uuid
         .into_iter()
         .map(|u| {
-            let uuid = ShortUuid::parse_str(u).unwrap().to_uuid();
-            uuid.to_string()
+            let uuidi = ShortUuid::parse_str(u);
+            match uuidi {
+                Ok(uuidi) => Rstr::from(uuidi.to_uuid().to_string()),
+                Err(_) => Rstr::na(),
+            }
         })
         .collect::<Strings>()
 }
@@ -108,10 +119,16 @@ fn short_bitcoin58_to_uuid_(short_uuid: Strings) -> Strings {
     short_uuid
         .into_iter()
         .map(|u| {
-            let uuid = ShortUuidCustom::parse_str(u, &translator)
-                .unwrap()
-                .to_uuid(&translator);
-            uuid.unwrap().to_string()
+            // Add missing short uuid length check
+            // https://github.com/radim10/short-uuid/blob/e2a82de5b6d1aae9a2a351aef74ecaf51a2e9d35/src/lib.rs#L289-L304
+            if u.len() != 22 {
+                return Rstr::na();
+            }
+            let uuidi = ShortUuidCustom::parse_str(u, &translator);
+            match uuidi {
+                Ok(uuidi) => Rstr::from(uuidi.to_uuid(&translator).unwrap().to_string()),
+                Err(_) => Rstr::na(),
+            }
         })
         .collect::<Strings>()
 }
